@@ -224,7 +224,7 @@ export default function Projects() {
           </p>
         </div>
         <a
-          href="https://github.com/lalurifqi"
+          href="https://github.com/tehtongtjie"
           target="_blank"
           rel="noreferrer"
           style={{
