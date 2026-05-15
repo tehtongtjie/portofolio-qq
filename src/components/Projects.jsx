@@ -3,31 +3,47 @@ import { ExternalLink } from 'lucide-react'
 import { useState } from 'react'
 
 const projects = [
-  {
-    id: 1,
-    title: 'BPR NTB Website Redesign',
-    desc: 'Redesign dan pengembangan website resmi PT Bank BPR NTB Perseroda. Fokus pada peningkatan UI/UX, information architecture, dan implementasi fitur content management, UMKM listing, serta lowongan kerja.',
-    tags: ['UI/UX Design', 'Figma', 'React', 'Content Management'],
-    type: 'Web · Internship Project',
-    year: '2025–2026',
-    status: 'Live',
-    color: '#c9a96e',
-    accent: 'rgba(201,169,110,0.12)',
-    mockupLines: [
-      { x: 0, y: 0, w: '100%', h: '38px', bg: '#1a1a24', radius: '8px 8px 0 0' },
-      { x: 12, y: 10, w: '80px', h: '8px', bg: '#c9a96e33', radius: '4px' },
-      { x: 0, y: 38, w: '100%', h: '120px', bg: '#16161e' },
-      { x: 24, y: 60, w: '45%', h: '12px', bg: '#c9a96e55', radius: '4px' },
-      { x: 24, y: 80, w: '60%', h: '8px', bg: '#ffffff15', radius: '4px' },
-      { x: 24, y: 96, w: '40%', h: '8px', bg: '#ffffff10', radius: '4px' },
-      { x: 24, y: 118, w: '90px', h: '24px', bg: '#c9a96e', radius: '6px' },
-      { x: 0, y: 158, w: '100%', h: '80px', bg: '#111118' },
-      { x: 16, y: 170, w: '28%', h: '50px', bg: '#1a1a24', radius: '8px' },
-      { x: '38%', y: 170, w: '28%', h: '50px', bg: '#1a1a24', radius: '8px' },
-      { x: '72%', y: 170, w: '25%', h: '50px', bg: '#1a1a24', radius: '8px' },
-    ],
-    links: { live: '#', github: '#' },
+{
+  id: 1,
+  title: 'SederhanAI',
+  desc: 'Platform berbasis AI yang membantu masyarakat Indonesia memahami dokumen dengan bahasa yang lebih sederhana dan mudah dipahami. Mendukung input teks, PDF, dan foto dokumen dengan fokus pada aksesibilitas, edukasi publik, serta pengalaman pengguna yang intuitif.',
+  tags: [
+    'UI/UX Design',
+    'React',
+    'Gemini AI',
+    'Accessibility',
+    'Document Simplification',
+  ],
+  type: 'AI Web Platform',
+  year: '2026',
+  status: 'In Progress',
+  color: '#4f8cff',
+  accent: 'rgba(79,140,255,0.12)',
+
+  mockupLines: [
+    { x: 0, y: 0, w: '100%', h: '38px', bg: '#111827', radius: '8px 8px 0 0' },
+    { x: 12, y: 10, w: '110px', h: '8px', bg: '#4f8cff55', radius: '4px' },
+
+    { x: 0, y: 38, w: '100%', h: '130px', bg: '#0f172a' },
+
+    { x: 24, y: 58, w: '52%', h: '14px', bg: '#4f8cff88', radius: '4px' },
+    { x: 24, y: 82, w: '68%', h: '8px', bg: '#ffffff18', radius: '4px' },
+    { x: 24, y: 98, w: '55%', h: '8px', bg: '#ffffff10', radius: '4px' },
+
+    { x: 24, y: 122, w: '120px', h: '30px', bg: '#4f8cff', radius: '8px' },
+
+    { x: 0, y: 168, w: '100%', h: '90px', bg: '#111827' },
+
+    { x: 16, y: 184, w: '28%', h: '56px', bg: '#1e293b', radius: '10px' },
+    { x: '36%', y: 184, w: '28%', h: '56px', bg: '#1e293b', radius: '10px' },
+    { x: '68%', y: 184, w: '28%', h: '56px', bg: '#1e293b', radius: '10px' },
+  ],
+
+  links: {
+    live: '#',
+    github: '#',
   },
+},
   {
     id: 2,
     title: 'AI Study Assistant',
