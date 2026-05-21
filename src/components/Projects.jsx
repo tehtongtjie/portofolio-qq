@@ -40,7 +40,7 @@ const projects = [
     ],
     links: {
       live: 'https://simdampak-403394555424.asia-southeast1.run.app/', // Ganti atau sesuaikan jika URL Cloud Run berbeda
-      github: 'https://github.com/tehtongtjie/SimDampak-GIS', // Ganti dengan URL GitHub yang sesuai
+      github: 'https://github.com/tehtongtjie/simdampak/tree/main', // Ganti dengan URL GitHub yang sesuai
     },
   },
   {
