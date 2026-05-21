@@ -5,6 +5,46 @@ import { useState } from 'react'
 const projects = [
   {
     id: 1,
+    title: 'SimDampak – Peta Simulasi Dampak Pembangunan',
+    desc: 'Platform Web-GIS interaktif bertenaga Generative AI untuk menyimulasikan radius dampak lingkungan (AMDAL) dari proyek industri. Mengintegrasikan data cuaca real-time, validasi ambang batas baku mutu hukum Indonesia, serta otomatisasi pembuatan dokumen advokasi hukum untuk warga terdampak.',
+    tags: [
+      'Web-GIS',
+      'React',
+      'Gemini AI',
+      'Turf.js',
+      'Chart.js',
+      'Environmental Advocacy',
+    ],
+    type: 'AI & Geospatial Platform',
+    year: '2026',
+    status: 'Live',
+    color: '#ef4444', // Crimson/Alert Red
+    accent: 'rgba(239, 68, 68, 0.12)',
+    mockupLines: [
+      { x: 0, y: 0, w: '100%', h: '38px', bg: '#111827', radius: '8px 8px 0 0' },
+      { x: 12, y: 10, w: '90px', h: '8px', bg: '#ef444455', radius: '4px' },
+      // Layout Peta Spasial (Tengah)
+      { x: 0, y: 38, w: '100%', h: '160px', bg: '#0b0f19' },
+      // Efek Buffer Rings Lingkaran (Pusat Proyek)
+      { x: '50%', y: '100px', w: '80px', h: '80px', bg: 'rgba(239,68,68,0.15)', radius: '50%', transform: 'translate(-50%, -50%)' },
+      { x: '50%', y: '100px', w: '40px', h: '40px', bg: 'rgba(239,68,68,0.3)', radius: '50%', transform: 'translate(-50%, -50%)' },
+      { x: '50%', y: '100px', w: '6px', h: '6px', bg: '#ef4444', radius: '50%', transform: 'translate(-50%, -50%)' }, // Pinpoint
+      // Sidebar Input & Kontrol (Kiri)
+      { x: 10, y: 48, w: '65px', h: '140px', bg: '#111827cc', radius: '6px' },
+      { x: 16, y: 56, w: '40px', h: '6px', bg: '#ffffff20', radius: '2px' },
+      { x: 16, y: 68, w: '50px', h: '6px', bg: '#ffffff10', radius: '2px' },
+      { x: 16, y: 160, w: '53px', h: '18px', bg: '#ef4444', radius: '4px' }, // Tombol Simulasi
+      // Panel Skor Metrik (Kanan)
+      { x: '78%', y: 48, w: '65px', h: '110px', bg: '#111827cc', radius: '6px' },
+      { x: '82%', y: 58, w: '45px', h: '35px', bg: '#rgba(255,255,255,0.03)', radius: '4px' }, // Mini Chart Placeholder
+    ],
+    links: {
+      live: 'https://simdampak-403394555424.asia-southeast1.run.app/', // Ganti atau sesuaikan jika URL Cloud Run berbeda
+      github: 'https://github.com/tehtongtjie/SimDampak-GIS', // Ganti dengan URL GitHub yang sesuai
+    },
+  },
+  {
+    id: 2,
     title: 'SederhanAI',
     desc: 'Platform berbasis AI yang membantu masyarakat Indonesia memahami dokumen dengan bahasa yang lebih sederhana dan mudah dipahami. Mendukung input teks, PDF, dan foto dokumen dengan fokus pada aksesibilitas, edukasi publik, serta pengalaman pengguna yang intuitif.',
     tags: [
@@ -34,11 +74,11 @@ const projects = [
     ],
     links: {
       live: 'https://sederhanai-403394555424.asia-southeast1.run.app/',
-      github: null, // ganti dengan URL GitHub jika sudah ada
+      github: null,
     },
   },
-{
-    id: 2,
+  {
+    id: 3,
     title: 'AetherPass',
     desc: 'Platform SaaS event premium bergaya dark-mode untuk seminar, konferensi tech, dan bootcamp. Menghadirkan pengalaman "Beyond Attendance" dengan tiket digital glassmorphism, seat picker interaktif, dan gamifikasi badge.',
     tags: ['Next.js', 'TailwindCSS', 'Framer Motion', 'Recharts'],
@@ -65,8 +105,8 @@ const projects = [
     links: { live: 'https://aetherpass-403394555424.asia-southeast1.run.app', github: 'https://github.com/tehtongtjie/AetherPass' },
   },
   {
-    id: 3,
-title: 'BPR NTB Website Redesign',
+    id: 4,
+    title: 'BPR NTB Website Redesign',
     desc: 'Redesign dan pengembangan website resmi PT Bank BPR NTB Perseroda. Fokus pada peningkatan UI/UX, information architecture, dan implementasi fitur content management, UMKM listing, serta lowongan kerja.',
     tags: ['UI/UX Design', 'Figma', 'React', 'Content Management'],
     type: 'Web · Internship Project',
@@ -150,7 +190,7 @@ function MockupSVG({ lines, color }) {
   )
 }
 
-const filters = ['All', 'Web', 'Design', 'AI', 'Education']
+const filters = ['All', 'Web', 'Design', 'AI', 'Geospatial']
 
 export default function Projects() {
   const [active, setActive] = useState('All')
@@ -285,7 +325,7 @@ function ProjectCard({ project }) {
             letterSpacing: '0.04em',
           }}>
             {project.type}
-          </span>
+          </span >
           <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
             <span style={{
               width: '6px', height: '6px', borderRadius: '50%',
