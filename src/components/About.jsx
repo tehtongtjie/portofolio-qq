@@ -2,28 +2,67 @@ import { motion } from 'framer-motion'
 import { SectionWrapper, SectionHeader } from './SectionWrapper'
 
 const skills = [
-  'UI/UX Design', 'Figma', 'React', 'JavaScript', 'TypeScript',
-  'Python', 'Node.js', 'SQL / PostgreSQL', 'Tailwind CSS',
-  'ERD & DB Design', 'Generative AI', 'Prompt Engineering',
-  'LLMs', 'AWS Cloud', 'Agile / Lean', 'Personal Branding',
+  { name: 'UI/UX Design', category: 'design' },
+  { name: 'Figma', category: 'design' },
+  { name: 'React', category: 'frontend' },
+  { name: 'JavaScript', category: 'frontend' },
+  { name: 'TypeScript', category: 'frontend' },
+  { name: 'Python', category: 'backend' },
+  { name: 'Node.js', category: 'backend' },
+  { name: 'SQL / PostgreSQL', category: 'backend' },
+  { name: 'Tailwind CSS', category: 'frontend' },
+  { name: 'ERD & DB Design', category: 'backend' },
+  { name: 'Generative AI', category: 'ai' },
+  { name: 'Prompt Engineering', category: 'ai' },
+  { name: 'LLMs', category: 'ai' },
+  { name: 'AWS Cloud', category: 'cloud' },
+  { name: 'Agile / Lean', category: 'soft' },
+  { name: 'Personal Branding', category: 'soft' },
 ]
 
-// Variasi animasi untuk efek scroll-reveal
+const categoryColors = {
+  design: 'rgba(236, 72, 153, 0.15)',
+  frontend: 'rgba(59, 130, 246, 0.15)',
+  backend: 'rgba(34, 197, 94, 0.15)',
+  ai: 'rgba(168, 85, 247, 0.15)',
+  cloud: 'rgba(249, 115, 22, 0.15)',
+  soft: 'rgba(234, 179, 8, 0.12)',
+}
+
+const categoryBorders = {
+  design: 'rgba(236, 72, 153, 0.35)',
+  frontend: 'rgba(59, 130, 246, 0.35)',
+  backend: 'rgba(34, 197, 94, 0.35)',
+  ai: 'rgba(168, 85, 247, 0.35)',
+  cloud: 'rgba(249, 115, 22, 0.35)',
+  soft: 'rgba(234, 179, 8, 0.3)',
+}
+
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.1, delayChildren: 0.1 },
+    transition: { staggerChildren: 0.08, delayChildren: 0.15 },
   },
 }
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 20, filter: 'blur(8px)' },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    filter: 'blur(0px)', 
-    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } 
+  hidden: { opacity: 0, y: 28, filter: 'blur(10px)' },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] },
+  },
+}
+
+const tagVariants = {
+  hidden: { opacity: 0, scale: 0.85, y: 12 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] },
   },
 }
 
@@ -31,15 +70,15 @@ export default function About() {
   return (
     <SectionWrapper id="about">
       <SectionHeader label="01 — About" title="A bit about me" />
-      
-      <motion.div 
+
+      <motion.div
         className="about-grid"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
+        viewport={{ once: true, margin: '-80px' }}
       >
-        {/* Kolom Kiri: Teks Deskripsi */}
+        {/* Left Column – Text */}
         <div className="about-text-content">
           {[
             "I'm an Informatics Engineering student at Universitas Mataram with a strong passion for creating digital products that are both functional and visually compelling. My journey spans UI/UX design, web development, database systems, and AI-powered tools.",
@@ -50,72 +89,210 @@ export default function About() {
               {text}
             </motion.p>
           ))}
+
+          {/* Quick Stats */}
+          <motion.div variants={itemVariants} className="about-stats">
+            <div className="stat-item">
+              <span className="stat-number">3+</span>
+              <span className="stat-label">Years Learning</span>
+            </div>
+            <div className="stat-divider" />
+            <div className="stat-item">
+              <span className="stat-number">10+</span>
+              <span className="stat-label">Projects</span>
+            </div>
+            <div className="stat-divider" />
+            <div className="stat-item">
+              <span className="stat-number">5+</span>
+              <span className="stat-label">Certifications</span>
+            </div>
+          </motion.div>
         </div>
 
-        {/* Kolom Kanan: Tech Stack Card */}
+        {/* Right Column – Skills Card */}
         <motion.div variants={itemVariants} className="skills-card">
           <div className="skills-card-header">
-            <span className="dot-indicator" />
-            <h3>Tech Stack & Skills</h3>
+            <div className="header-left">
+              <span className="dot-indicator" />
+              <h3>Tech Stack & Skills</h3>
+            </div>
+            <span className="skills-count">{skills.length}</span>
           </div>
-          
-          <div className="skills-container">
-            {skills.map(s => (
-              <SkillTag key={s}>{s}</SkillTag>
+
+          <motion.div
+            className="skills-container"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            {skills.map((s) => (
+              <motion.span
+                key={s.name}
+                className="skill-tag"
+                variants={tagVariants}
+                style={{
+                  background: categoryColors[s.category],
+                  borderColor: categoryBorders[s.category],
+                }}
+                whileHover={{
+                  y: -4,
+                  scale: 1.04,
+                  transition: { duration: 0.25 },
+                }}
+              >
+                {s.name}
+              </motion.span>
+            ))}
+          </motion.div>
+
+          {/* Legend */}
+          <div className="skills-legend">
+            {[
+              { label: 'Design', color: 'rgba(236, 72, 153, 0.7)' },
+              { label: 'Frontend', color: 'rgba(59, 130, 246, 0.7)' },
+              { label: 'Backend', color: 'rgba(34, 197, 94, 0.7)' },
+              { label: 'AI', color: 'rgba(168, 85, 247, 0.7)' },
+              { label: 'Cloud', color: 'rgba(249, 115, 22, 0.7)' },
+              { label: 'Soft Skills', color: 'rgba(234, 179, 8, 0.65)' },
+            ].map((item) => (
+              <div key={item.label} className="legend-item">
+                <span
+                  className="legend-dot"
+                  style={{ background: item.color }}
+                />
+                <span>{item.label}</span>
+              </div>
             ))}
           </div>
         </motion.div>
       </motion.div>
 
-      {/* Internal CSS */}
       <style>{`
-        /* --- LAYOUT --- */
+        /* ========== LAYOUT ========== */
         .about-grid {
           display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 4rem;
+          grid-template-columns: 1.05fr 0.95fr;
+          gap: 4.5rem;
           align-items: start;
         }
 
-        /* --- TYPOGRAPHY (TEXT KOLOM KIRI) --- */
+        /* ========== TEXT COLUMN ========== */
         .about-text-content p {
           color: var(--text, #e4e4e7);
-          line-height: 1.85;
-          margin-bottom: 1.5rem;
-          font-size: 1.05rem;
+          line-height: 1.9;
+          margin-bottom: 1.6rem;
+          font-size: 1.065rem;
           font-weight: 300;
-          opacity: 0.85;
-          transition: opacity 0.3s ease;
+          opacity: 0.82;
+          transition: opacity 0.35s ease;
+        }
+
+        .about-text-content p:last-of-type {
+          margin-bottom: 2.5rem;
         }
 
         .about-text-content p:hover {
           opacity: 1;
         }
 
-        /* --- SKILLS CARD (KOLOM KANAN) --- */
+        /* ========== STATS ========== */
+        .about-stats {
+          display: flex;
+          align-items: center;
+          gap: 1.75rem;
+          padding: 1.5rem 0 0;
+          border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .stat-item {
+          display: flex;
+          flex-direction: column;
+          gap: 0.25rem;
+        }
+
+        .stat-number {
+          font-family: var(--serif, Georgia, serif);
+          font-size: 1.75rem;
+          font-weight: 600;
+          color: var(--accent, #a78bfa);
+          letter-spacing: -0.03em;
+          line-height: 1;
+        }
+
+        .stat-label {
+          font-size: 12px;
+          color: var(--muted, #a1a1aa);
+          letter-spacing: 0.04em;
+          text-transform: uppercase;
+          font-weight: 500;
+        }
+
+        .stat-divider {
+          width: 1px;
+          height: 36px;
+          background: rgba(255, 255, 255, 0.08);
+        }
+
+        /* ========== SKILLS CARD ========== */
         .skills-card {
-          background: rgba(255, 255, 255, 0.02);
-          border: 1px solid rgba(255, 255, 255, 0.05);
-          border-radius: 20px;
-          padding: 2.5rem;
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
-          box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+          background: linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.03) 0%,
+            rgba(255, 255, 255, 0.015) 100%
+          );
+          border: 1px solid rgba(255, 255, 255, 0.07);
+          border-radius: 24px;
+          padding: 2.25rem 2.4rem;
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          box-shadow:
+            0 4px 24px rgba(0, 0, 0, 0.12),
+            inset 0 1px 0 rgba(255, 255, 255, 0.04);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .skills-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 1px;
+          background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(167, 139, 250, 0.35),
+            transparent
+          );
         }
 
         .skills-card-header {
           display: flex;
           align-items: center;
+          justify-content: space-between;
+          margin-bottom: 1.75rem;
+        }
+
+        .header-left {
+          display: flex;
+          align-items: center;
           gap: 12px;
-          margin-bottom: 1.5rem;
         }
 
         .dot-indicator {
           width: 8px;
           height: 8px;
           border-radius: 50%;
-          background: var(--accent, #8b5cf6);
-          box-shadow: 0 0 10px var(--accent, #8b5cf6);
+          background: var(--accent, #a78bfa);
+          box-shadow: 0 0 12px var(--accent, #a78bfa);
+          animation: pulse 2.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.65; transform: scale(0.9); }
         }
 
         .skills-card-header h3 {
@@ -128,54 +305,97 @@ export default function About() {
           font-weight: 500;
         }
 
+        .skills-count {
+          font-family: var(--mono, monospace);
+          font-size: 12px;
+          color: var(--accent, #a78bfa);
+          background: rgba(167, 139, 250, 0.12);
+          padding: 4px 10px;
+          border-radius: 999px;
+          font-weight: 500;
+        }
+
         .skills-container {
           display: flex;
           flex-wrap: wrap;
           gap: 10px;
+          margin-bottom: 1.75rem;
         }
 
-        /* --- SKILL TAGS --- */
+        /* ========== SKILL TAGS ========== */
         .skill-tag {
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          color: var(--muted, #a1a1aa);
+          border: 1px solid;
+          color: var(--text, #e4e4e7);
           font-size: 13px;
-          padding: 8px 16px;
+          padding: 8px 15px;
           border-radius: 999px;
           font-family: var(--mono, monospace);
-          letter-spacing: 0.02em;
+          letter-spacing: 0.015em;
           cursor: default;
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          transition: box-shadow 0.3s ease;
+          backdrop-filter: blur(4px);
         }
 
         .skill-tag:hover {
-          background: rgba(139, 92, 246, 0.1); /* Gunakan var(--accent) jika ada fallback rgba-nya */
-          border-color: var(--accent, #8b5cf6);
-          color: var(--text, #ffffff);
-          transform: translateY(-3px) scale(1.02);
-          box-shadow: 0 6px 15px rgba(139, 92, 246, 0.15);
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
         }
 
-        /* --- RESPONSIVE --- */
+        /* ========== LEGEND ========== */
+        .skills-legend {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 12px 16px;
+          padding-top: 1.25rem;
+          border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .legend-item {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          font-size: 11px;
+          color: var(--muted, #a1a1aa);
+          letter-spacing: 0.02em;
+        }
+
+        .legend-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          flex-shrink: 0;
+        }
+
+        /* ========== RESPONSIVE ========== */
         @media (max-width: 968px) {
           .about-grid {
             grid-template-columns: 1fr;
             gap: 3rem;
           }
+
           .skills-card {
             padding: 2rem;
+          }
+
+          .about-stats {
+            gap: 1.25rem;
+          }
+
+          .stat-number {
+            font-size: 1.5rem;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .about-stats {
+            flex-wrap: wrap;
+            gap: 1.25rem 1.5rem;
+          }
+
+          .stat-divider {
+            display: none;
           }
         }
       `}</style>
     </SectionWrapper>
-  )
-}
-
-function SkillTag({ children }) {
-  // Komponen tag sekarang jauh lebih bersih karena stylenya dipindah ke CSS class
-  return (
-    <span className="skill-tag">
-      {children}
-    </span>
   )
 }
