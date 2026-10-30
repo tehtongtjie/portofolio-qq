@@ -1,6 +1,9 @@
 import { SectionWrapper, SectionHeader } from './SectionWrapper'
 import { ExternalLink } from 'lucide-react'
 import { useState } from 'react'
+import BorderGlow from './reactbits/BorderGlow'
+import GooeyNav from './reactbits/GooeyNav'
+import useTheme from './useTheme'
 
 const projects = [
   {
@@ -127,7 +130,7 @@ const projects = [
       { x: '38%', y: 170, w: '28%', h: '50px', bg: '#1a1a24', radius: '8px' },
       { x: '72%', y: 170, w: '25%', h: '50px', bg: '#1a1a24', radius: '8px' },
     ],
-    links: { live: null, github: 'https://github.com/tehtongtjie/BPR-NTB-PT' },
+    links: { live: 'https://bprntb.co.id/', github: null },
   },
 ]
 
@@ -194,41 +197,32 @@ const filters = ['All', 'Web', 'Design', 'AI', 'Geospatial']
 
 export default function Projects() {
   const [active, setActive] = useState('All')
+  const dark = useTheme() === 'dark'
 
   const filtered = active === 'All'
     ? projects
-    : projects.filter(p =>
-      p.tags.some(t => t.toLowerCase().includes(active.toLowerCase())) ||
-      p.type.toLowerCase().includes(active.toLowerCase())
-    )
+    : projects.filter(p => {
+      // Cocokkan per kata utuh, supaya "AI" tidak ikut cocok dengan "TailwindCSS"
+      const words = [...p.tags, p.type].join(' ').toLowerCase().split(/[^a-z0-9]+/)
+      return words.includes(active.toLowerCase())
+    })
 
   return (
     <SectionWrapper id="projects">
       <SectionHeader label="05 — Projects" title="Things I've built" />
 
-      {/* Filter tabs */}
-      <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '2.5rem' }}>
-        {filters.map(f => (
-          <button
-            key={f}
-            onClick={() => setActive(f)}
-            style={{
-              background: active === f ? 'var(--accent)' : 'var(--surface2)',
-              border: `0.5px solid ${active === f ? 'var(--accent)' : 'var(--border2)'}`,
-              color: active === f ? '#0a0a0f' : 'var(--muted)',
-              padding: '6px 16px',
-              borderRadius: '999px',
-              fontSize: '12px',
-              fontFamily: 'var(--mono)',
-              fontWeight: active === f ? 600 : 400,
-              cursor: 'pointer',
-              letterSpacing: '0.04em',
-              transition: 'all 0.2s',
-            }}
-          >
-            {f}
-          </button>
-        ))}
+      {/* Filter tabs (Gooey Nav) */}
+      <div style={{ marginBottom: '2.5rem', display: 'flex' }}>
+        <GooeyNav
+          items={filters.map(f => ({ label: f, href: '#' }))}
+          activeIndex={filters.indexOf(active)}
+          onChange={(index) => setActive(filters[index])}
+          theme={dark ? 'dark' : 'light'}
+          color={dark ? '#c9a96e' : '#a07a38'}
+          activeTextColor={dark ? '#0a0a0f' : '#ffffff'}
+          colors={dark ? ['#c9a96e', '#f3dfb4', '#8a6a33'] : ['#a07a38', '#d9b77a', '#6e5326']}
+          size="sm"
+        />
       </div>
 
       {/* Grid */}
@@ -295,21 +289,28 @@ export default function Projects() {
 function ProjectCard({ project }) {
   const status = statusColors[project.status]
   const [hovered, setHovered] = useState(false)
+  const dark = useTheme() === 'dark'
 
   return (
     <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
-        background: 'var(--surface)',
-        border: `0.5px solid ${hovered ? project.color + '44' : 'var(--border)'}`,
-        borderRadius: '16px',
-        overflow: 'hidden',
-        transition: 'border-color 0.3s, transform 0.3s',
+        transition: 'transform 0.3s',
         transform: hovered ? 'translateY(-4px)' : 'translateY(0)',
-        cursor: 'default',
+        height: '100%',
       }}
     >
+    <BorderGlow
+      backgroundColor={dark ? '#111118' : '#ffffff'}
+      borderRadius={16}
+      glowColor={dark ? '38 55 65' : '38 60 45'}
+      colors={[project.color, dark ? '#c9a96e' : '#a07a38', '#f3dfb4']}
+      glowRadius={34}
+      glowIntensity={dark ? 1 : 0.8}
+      edgeSensitivity={28}
+    >
+    <div style={{ overflow: 'hidden', borderRadius: '16px', cursor: 'default' }}>
       {/* Mockup */}
       <div style={{ padding: '14px 14px 0' }}>
         <MockupSVG lines={project.mockupLines} color={project.color} />
@@ -383,7 +384,7 @@ function ProjectCard({ project }) {
                 }}
                 onMouseEnter={e => {
                   e.currentTarget.style.color = 'var(--text)'
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)'
+                  e.currentTarget.style.borderColor = 'rgba(var(--ink-rgb),0.2)'
                 }}
                 onMouseLeave={e => {
                   e.currentTarget.style.color = 'var(--muted)'
@@ -421,6 +422,8 @@ function ProjectCard({ project }) {
           </div>
         )}
       </div>
+    </div>
+    </BorderGlow>
     </div>
   )
 }

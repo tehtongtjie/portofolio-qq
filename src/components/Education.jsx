@@ -87,8 +87,8 @@ export default function Education() {
 
         /* --- CARD STYLING --- */
         .edu-card {
-          background: rgba(255, 255, 255, 0.02);
-          border: 1px solid rgba(255, 255, 255, 0.06);
+          background: rgba(var(--ink-rgb), 0.02);
+          border: 1px solid rgba(var(--ink-rgb), 0.06);
           border-radius: 20px;
           padding: 2rem;
           backdrop-filter: blur(12px);
@@ -100,8 +100,8 @@ export default function Education() {
         }
 
         .edu-card:hover {
-          background: rgba(255, 255, 255, 0.04);
-          border-color: rgba(255, 255, 255, 0.12);
+          background: rgba(var(--ink-rgb), 0.04);
+          border-color: rgba(var(--ink-rgb), 0.12);
           transform: translateY(-5px);
           box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.3);
         }
@@ -118,13 +118,13 @@ export default function Education() {
           width: 52px;
           height: 52px;
           border-radius: 14px;
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: rgba(var(--ink-rgb), 0.03);
+          border: 1px solid rgba(var(--ink-rgb), 0.08);
           display: flex;
           align-items: center;
           justify-content: center;
           font-size: 24px;
-          box-shadow: inset 0 2px 10px rgba(255, 255, 255, 0.02);
+          box-shadow: inset 0 2px 10px rgba(var(--ink-rgb), 0.02);
           transition: transform 0.3s ease;
         }
 
@@ -168,12 +168,12 @@ export default function Education() {
           flex-wrap: wrap;
           gap: 8px;
           padding-top: 1.5rem;
-          border-top: 1px solid rgba(255, 255, 255, 0.06);
+          border-top: 1px solid rgba(var(--ink-rgb), 0.06);
         }
 
         .edu-tag {
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: rgba(var(--ink-rgb), 0.03);
+          border: 1px solid rgba(var(--ink-rgb), 0.08);
           color: var(--muted, #a1a1aa);
           font-size: 11px;
           padding: 5px 12px;
@@ -184,7 +184,7 @@ export default function Education() {
         }
 
         .edu-card:hover .edu-tag {
-          border-color: rgba(255, 255, 255, 0.15);
+          border-color: rgba(var(--ink-rgb), 0.15);
           color: var(--text, #e4e4e7);
         }
 

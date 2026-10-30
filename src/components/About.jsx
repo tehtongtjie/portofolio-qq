@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { SectionWrapper, SectionHeader } from './SectionWrapper'
+import AboutBadge from './AboutBadge'
 
 const skills = [
   { name: 'UI/UX Design', category: 'design' },
@@ -78,6 +79,11 @@ export default function About() {
         whileInView="visible"
         viewport={{ once: true, margin: '-80px' }}
       >
+        {/* Kartu ID 3D (Lanyard) */}
+        <motion.div variants={itemVariants} className="about-badge-col">
+          <AboutBadge />
+        </motion.div>
+
         {/* Left Column – Text */}
         <div className="about-text-content">
           {[
@@ -172,10 +178,14 @@ export default function About() {
         /* ========== LAYOUT ========== */
         .about-grid {
           display: grid;
-          grid-template-columns: 1.05fr 0.95fr;
-          gap: 4.5rem;
-          align-items: start;
+          grid-template-columns: 0.85fr 1.15fr;
+          gap: 2.5rem 4rem;
+          align-items: center;
         }
+
+        .about-badge-col { grid-column: 1; grid-row: 1; }
+        .about-text-content { grid-column: 2; grid-row: 1; }
+        .skills-card { grid-column: 1 / -1; grid-row: 2; }
 
         /* ========== TEXT COLUMN ========== */
         .about-text-content p {
@@ -202,7 +212,7 @@ export default function About() {
           align-items: center;
           gap: 1.75rem;
           padding: 1.5rem 0 0;
-          border-top: 1px solid rgba(255, 255, 255, 0.06);
+          border-top: 1px solid rgba(var(--ink-rgb), 0.06);
         }
 
         .stat-item {
@@ -231,24 +241,24 @@ export default function About() {
         .stat-divider {
           width: 1px;
           height: 36px;
-          background: rgba(255, 255, 255, 0.08);
+          background: rgba(var(--ink-rgb), 0.08);
         }
 
         /* ========== SKILLS CARD ========== */
         .skills-card {
           background: linear-gradient(
             145deg,
-            rgba(255, 255, 255, 0.03) 0%,
-            rgba(255, 255, 255, 0.015) 100%
+            rgba(var(--ink-rgb), 0.03) 0%,
+            rgba(var(--ink-rgb), 0.015) 100%
           );
-          border: 1px solid rgba(255, 255, 255, 0.07);
+          border: 1px solid rgba(var(--ink-rgb), 0.07);
           border-radius: 24px;
           padding: 2.25rem 2.4rem;
           backdrop-filter: blur(16px);
           -webkit-backdrop-filter: blur(16px);
           box-shadow:
             0 4px 24px rgba(0, 0, 0, 0.12),
-            inset 0 1px 0 rgba(255, 255, 255, 0.04);
+            inset 0 1px 0 rgba(var(--ink-rgb), 0.04);
           position: relative;
           overflow: hidden;
         }
@@ -346,7 +356,7 @@ export default function About() {
           flex-wrap: wrap;
           gap: 12px 16px;
           padding-top: 1.25rem;
-          border-top: 1px solid rgba(255, 255, 255, 0.06);
+          border-top: 1px solid rgba(var(--ink-rgb), 0.06);
         }
 
         .legend-item {
@@ -371,6 +381,10 @@ export default function About() {
             grid-template-columns: 1fr;
             gap: 3rem;
           }
+
+          .about-badge-col,
+          .about-text-content,
+          .skills-card { grid-column: 1; grid-row: auto; }
 
           .skills-card {
             padding: 2rem;

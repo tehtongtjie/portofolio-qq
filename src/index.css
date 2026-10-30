@@ -3,6 +3,33 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
+  /* Tema terang (default) */
+  --bg: #f6f3ec;
+  --surface: #ffffff;
+  --surface2: #efebe2;
+  --border: rgba(30,28,40,0.08);
+  --border2: rgba(30,28,40,0.16);
+  --text: #1c1b22;
+  --muted: #625f6e;
+  --accent: #a07a38;
+  --accent-rgb: 160, 122, 56;
+  --accent2: #5b4fe0;
+  --green: #1f9e6e;
+  --ink-rgb: 30, 28, 40;
+  --hero-bg: #f6f3ec;
+  --nav-bg: rgba(246, 243, 236, 0.85);
+  --menu-bg: rgba(246, 243, 236, 0.97);
+  --on-accent: #ffffff;
+  --btn-primary-bg: #1c1b22;
+  --btn-primary-text: #f6f3ec;
+  --folder-front: #c49a52;
+  --serif: 'DM Serif Display', serif;
+  --mono: 'DM Mono', monospace;
+  --sans: 'Sora', sans-serif;
+}
+
+/* Tema gelap */
+:root[data-theme="dark"] {
   --bg: #0a0a0f;
   --surface: #111118;
   --surface2: #16161e;
@@ -11,17 +38,24 @@
   --text: #f0eee8;
   --muted: #8a8898;
   --accent: #c9a96e;
+  --accent-rgb: 201, 169, 110;
   --accent2: #7c6fff;
   --green: #5ecfa0;
-  --serif: 'DM Serif Display', serif;
-  --mono: 'DM Mono', monospace;
-  --sans: 'Sora', sans-serif;
+  --ink-rgb: 255, 255, 255;
+  --hero-bg: #08080c;
+  --nav-bg: rgba(8, 8, 12, 0.82);
+  --menu-bg: rgba(6, 6, 10, 0.97);
+  --on-accent: #0a0a0f;
+  --btn-primary-bg: #ffffff;
+  --btn-primary-text: #0a0a0f;
+  --folder-front: #dcc08e;
 }
 
 html { scroll-behavior: smooth; }
 
 body {
   background: var(--bg);
+  transition: background 0.3s ease, color 0.3s ease;
   color: var(--text);
   font-family: var(--sans);
   font-size: 15px;
@@ -31,7 +65,7 @@ body {
 
 a { color: inherit; text-decoration: none; }
 
-::selection { background: rgba(201,169,110,0.25); color: var(--text); }
+::selection { background: rgba(var(--accent-rgb),0.25); color: var(--text); }
 
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: var(--bg); }

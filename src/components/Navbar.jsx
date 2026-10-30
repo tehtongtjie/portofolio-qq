@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import ThemeToggle from './ThemeToggle'
 
 const links = [
   { label: 'About', href: '#about' },
   { label: 'Experience', href: '#experience' },
   { label: 'Certifications', href: '#certs' },
   { label: 'Projects', href: '#projects' },
+  { label: 'Playground', href: '#playground' },
   { label: 'Contact', href: '#contact' },
 ]
 
@@ -69,12 +71,12 @@ export default function Navbar() {
           justifyContent: 'space-between',
           alignItems: 'center',
           background: scrolled
-            ? 'rgba(8, 8, 12, 0.82)'
+            ? 'var(--nav-bg)'
             : 'transparent',
           backdropFilter: scrolled ? 'blur(24px) saturate(180%)' : 'none',
           WebkitBackdropFilter: scrolled ? 'blur(24px) saturate(180%)' : 'none',
           borderBottom: scrolled
-            ? '1px solid rgba(255,255,255,0.06)'
+            ? '1px solid rgba(var(--ink-rgb), 0.06)'
             : '1px solid transparent',
           boxShadow: scrolled
             ? '0 8px 32px rgba(0,0,0,0.35)'
@@ -173,14 +175,18 @@ export default function Navbar() {
             )
           })}
 
+          <div style={{ marginLeft: '0.75rem' }}>
+            <ThemeToggle />
+          </div>
+
           {/* CTA Button */}
           <a
             href="#contact"
             style={{
-              marginLeft: '1rem',
+              marginLeft: '0.75rem',
               padding: '0.55rem 1.35rem',
               background: 'var(--accent)',
-              color: '#0a0a0f',
+              color: 'var(--on-accent)',
               fontSize: '12px',
               fontWeight: 600,
               letterSpacing: '0.05em',
@@ -188,11 +194,11 @@ export default function Navbar() {
               textDecoration: 'none',
               borderRadius: '999px',
               transition: 'all 0.3s ease',
-              boxShadow: '0 0 0 0 rgba(var(--accent-rgb, 180, 140, 255), 0)',
+              boxShadow: '0 0 0 0 rgba(var(--accent-rgb), 0)',
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.transform = 'translateY(-1px)'
-              e.currentTarget.style.boxShadow = '0 8px 24px rgba(var(--accent-rgb, 180, 140, 255), 0.35)'
+              e.currentTarget.style.boxShadow = '0 8px 24px rgba(var(--accent-rgb), 0.35)'
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.transform = 'translateY(0)'
@@ -263,7 +269,7 @@ export default function Navbar() {
               position: 'fixed',
               inset: 0,
               zIndex: 999,
-              background: 'rgba(6, 6, 10, 0.97)',
+              background: 'var(--menu-bg)',
               backdropFilter: 'blur(32px)',
               WebkitBackdropFilter: 'blur(32px)',
               display: 'flex',
@@ -311,7 +317,7 @@ export default function Navbar() {
                 marginTop: '2rem',
                 padding: '0.9rem 2.2rem',
                 background: 'var(--accent)',
-                color: '#0a0a0f',
+                color: 'var(--on-accent)',
                 fontSize: '14px',
                 fontWeight: 600,
                 letterSpacing: '0.04em',
@@ -322,6 +328,10 @@ export default function Navbar() {
             >
               Let's Talk
             </motion.a>
+
+            <div style={{ marginTop: '1.25rem' }}>
+              <ThemeToggle size={44} />
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

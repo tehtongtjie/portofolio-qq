@@ -1,6 +1,10 @@
 import { SectionWrapper } from './SectionWrapper'
 import { Mail, MapPin } from 'lucide-react'
 import { motion } from 'framer-motion'
+import ElectricBorder from './reactbits/ElectricBorder'
+import Magnet from './reactbits/Magnet'
+import ShinyText from './reactbits/ShinyText'
+import useTheme from './useTheme'
 
 // --- SVG Icons (Perbaikan Path & ViewBox) ---
 const LinkedinIcon = ({ size = 18, className }) => (
@@ -66,8 +70,19 @@ const contactLinks = [
 ]
 
 export default function Contact() {
+  const dark = useTheme() === 'dark'
   return (
     <SectionWrapper id="contact">
+      <ElectricBorder
+        color={dark ? '#c9a96e' : '#a07a38'}
+        theme={dark ? 'dark' : 'light'}
+        borderRadius={24}
+        speed={0.8}
+        chaos={0.45}
+        thickness={1.5}
+        glow={dark ? 0.7 : 0.4}
+        cursorRadius={110}
+      >
       <motion.div 
         className="contact-card"
         initial={{ opacity: 0, y: 30 }}
@@ -78,9 +93,9 @@ export default function Contact() {
         <div className="contact-glow" aria-hidden="true" />
 
         <div className="contact-content-left">
-          <p className="contact-label">05 — Contact</p>
+          <p className="contact-label">07 — Contact</p>
           <h2 className="contact-title">
-            Let's work <em className="text-accent-gradient">together</em>
+            Let's work <em className="contact-accent"><ShinyText text="together" color={dark ? '#c9a96e' : '#a07a38'} shineColor={dark ? '#fff4dc' : '#f3dfb4'} speed={3} delay={1} /></em>
           </h2>
           <p className="contact-desc">
             I'm always open to meaningful collaborations, internship opportunities, or just a good conversation about design and technology. Feel free to reach out!
@@ -90,8 +105,8 @@ export default function Contact() {
         <div className="contact-links-container">
           {contactLinks.map(({ Icon, label, href }) =>
             href ? (
+              <Magnet key={label} padding={40} magnetStrength={6} wrapperClassName="contact-magnet">
               <a
-                key={label}
                 href={href}
                 target={href.startsWith('http') ? '_blank' : undefined}
                 rel="noreferrer"
@@ -102,6 +117,7 @@ export default function Contact() {
                 </div>
                 <span>{label}</span>
               </a>
+              </Magnet>
             ) : (
               <div key={label} className="contact-link-item static">
                 <div className="icon-wrapper">
@@ -113,12 +129,13 @@ export default function Contact() {
           )}
         </div>
       </motion.div>
+      </ElectricBorder>
 
       <style>{`
         .contact-card {
           position: relative;
-          background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: linear-gradient(145deg, rgba(var(--ink-rgb), 0.03) 0%, rgba(var(--ink-rgb), 0.01) 100%);
+          border: 1px solid rgba(var(--ink-rgb), 0.08);
           border-radius: 24px;
           padding: clamp(2rem, 6vw, 4rem);
           display: flex;
@@ -135,7 +152,7 @@ export default function Contact() {
           position: absolute;
           width: 300px;
           height: 300px;
-          background: var(--accent, #8b5cf6);
+          background: var(--accent);
           filter: blur(100px);
           opacity: 0.1;
           top: -150px;
@@ -151,7 +168,7 @@ export default function Contact() {
         .contact-label {
           font-family: var(--mono, monospace);
           font-size: 12px;
-          color: var(--accent, #8b5cf6);
+          color: var(--accent);
           letter-spacing: 0.15em;
           text-transform: uppercase;
           margin-bottom: 1rem;
@@ -159,14 +176,14 @@ export default function Contact() {
 
         .contact-title {
           font-size: clamp(2.2rem, 5vw, 3rem);
-          color: #fff;
+          color: var(--text);
           margin-bottom: 1.2rem;
           line-height: 1.1;
         }
 
         .text-accent-gradient {
           font-style: italic;
-          background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
+          background: linear-gradient(135deg, var(--accent) 0%, rgba(var(--accent-rgb), 0.4) 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
         }
@@ -185,11 +202,16 @@ export default function Contact() {
           min-width: 260px;
         }
 
+        .contact-accent { font-style: italic; }
+
+        .contact-magnet { display: block !important; width: 100%; }
+        .contact-magnet > div { width: 100%; }
+
         .contact-link-item {
           display: flex;
           align-items: center;
           gap: 12px;
-          color: #a1a1aa;
+          color: var(--muted);
           font-size: 14px;
           text-decoration: none;
           transition: 0.3s;
@@ -202,22 +224,22 @@ export default function Contact() {
           width: 38px;
           height: 38px;
           border-radius: 10px;
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: rgba(var(--ink-rgb), 0.03);
+          border: 1px solid rgba(var(--ink-rgb), 0.08);
         }
 
         .contact-link-item.interactive:hover {
-          color: #fff;
+          color: var(--text);
           transform: translateX(6px);
         }
 
         .contact-link-item.interactive:hover .icon-wrapper {
           background: rgba(139, 92, 246, 0.15);
-          border-color: #8b5cf6;
+          border-color: var(--accent);
         }
 
         .contact-link-item.interactive:hover .contact-icon {
-          color: #8b5cf6;
+          color: var(--accent);
         }
 
         @media (max-width: 850px) {
@@ -247,7 +269,7 @@ export function Footer() {
       <style>{`
         .site-footer {
           padding: 3rem 2rem;
-          border-top: 1px solid rgba(255, 255, 255, 0.05);
+          border-top: 1px solid rgba(var(--ink-rgb), 0.05);
           margin-top: 4rem;
         }
         .footer-content {
@@ -259,19 +281,19 @@ export function Footer() {
         }
         .footer-logo {
           font-weight: 700;
-          color: #fff;
+          color: var(--text);
           text-decoration: none;
           font-size: 1.2rem;
         }
         .footer-copyright {
           font-size: 13px;
-          color: #71717a;
+          color: var(--muted);
           text-align: center;
         }
         .back-to-top {
           font-size: 11px;
           text-transform: uppercase;
-          color: #71717a;
+          color: var(--muted);
           text-decoration: none;
           letter-spacing: 1px;
         }

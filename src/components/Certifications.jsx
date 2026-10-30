@@ -1,4 +1,7 @@
 import { SectionWrapper, SectionHeader } from './SectionWrapper'
+import GlareHover from './reactbits/GlareHover'
+import CertMarquee from './CertMarquee'
+import useTheme from './useTheme'
 
 const certs = [
   { icon: '🧠', title: 'Belajar Penggunaan Generative AI', issuer: 'Dicoding Indonesia', date: 'Apr 2026 · Valid until Apr 2029', id: '1OP8R45JVZQK' },
@@ -19,6 +22,7 @@ export default function Certifications() {
   return (
     <SectionWrapper id="certs">
       <SectionHeader label="04 — Certifications" title="Licenses & credentials" />
+      <CertMarquee />
       <div style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
@@ -33,13 +37,26 @@ export default function Certifications() {
 }
 
 function CertCard({ cert }) {
+  const dark = useTheme() === 'dark'
   return (
+    <GlareHover
+      width="100%"
+      height="100%"
+      background="transparent"
+      borderRadius="14px"
+      glareColor={dark ? '#f3dfb4' : '#ffffff'}
+      glareOpacity={dark ? 0.22 : 0.65}
+      glareSize={40}
+      blendMode={dark ? 'screen' : 'soft-light'}
+      style={{ display: 'grid', placeItems: 'stretch' }}
+    >
     <div
       style={{
         background: 'var(--surface)',
         border: '0.5px solid var(--border)',
         borderRadius: '14px',
         padding: '1.25rem',
+        height: '100%',
         display: 'flex', gap: '1rem', alignItems: 'flex-start',
         transition: 'border-color 0.25s, transform 0.2s',
         cursor: 'default',
@@ -72,5 +89,6 @@ function CertCard({ cert }) {
         )}
       </div>
     </div>
+    </GlareHover>
   )
 }

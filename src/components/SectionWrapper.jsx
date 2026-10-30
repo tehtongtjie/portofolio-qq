@@ -1,5 +1,7 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import DecryptedText from './reactbits/DecryptedText'
+import BlurText from './reactbits/BlurText'
 
 export function SectionWrapper({ children, id }) {
   const ref = useRef(null)
@@ -17,7 +19,7 @@ export function SectionWrapper({ children, id }) {
       <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 3rem' }}>
         {children}
       </div>
-      <style>{`@media(max-width:768px){ section > div { padding: 0 1.5rem !important; } }`}</style>
+      <style>{`@media(max-width:768px){ section:not(.hero-section) > div { padding: 0 1.5rem !important; } }`}</style>
     </motion.section>
   )
 }
@@ -30,12 +32,16 @@ export function SectionHeader({ label, title }) {
         fontSize: '11px', color: 'var(--accent)',
         letterSpacing: '0.15em', textTransform: 'uppercase',
         marginBottom: '0.6rem',
-      }}>{label}</p>
+      }}>
+        <DecryptedText text={label} animateOn="view" sequential speed={35} revealDirection="start" characters="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/<>_" />
+      </p>
       <h2 style={{
         fontFamily: 'var(--serif)',
         fontSize: 'clamp(1.8rem, 4vw, 2.4rem)',
         color: 'var(--text)', lineHeight: 1.1,
-      }}>{title}</h2>
+      }}>
+        <BlurText text={title} animateBy="words" direction="bottom" delay={90} />
+      </h2>
     </div>
   )
 }

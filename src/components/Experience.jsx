@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion'
 import { SectionWrapper, SectionHeader } from './SectionWrapper'
+import SpotlightCard from './reactbits/SpotlightCard'
+import useTheme from './useTheme'
 
 const experiences = [
   {
@@ -75,6 +77,7 @@ export default function Experience() {
         .exp-container {
           display: flex;
           flex-direction: column;
+          gap: 1.25rem;
           margin-top: 1rem;
         }
 
@@ -83,24 +86,18 @@ export default function Experience() {
           display: grid;
           grid-template-columns: 200px 1fr;
           gap: 3rem;
-          padding: 3rem 1.5rem;
-          border-top: 1px solid rgba(255, 255, 255, 0.08);
-          border-radius: 16px;
+          padding: 2.5rem 2.25rem;
+          border-radius: 20px;
           transition: all 0.3s ease;
           position: relative;
         }
 
         /* Hilangkan border top di elemen pertama agar tidak dobel dengan header */
-        .exp-item:first-child {
-          border-top: 1px solid transparent;
-        }
+
 
         /* Efek Hover Row */
         .exp-item:hover {
-          background: rgba(255, 255, 255, 0.02);
-          backdrop-filter: blur(10px);
-          -webkit-backdrop-filter: blur(10px);
-          box-shadow: 0 10px 40px -10px rgba(0,0,0,0.2);
+          transform: translateY(-3px);
         }
 
         /* --- LEFT COLUMN: TIMELINE/META --- */
@@ -119,8 +116,8 @@ export default function Experience() {
         .exp-duration {
           display: inline-flex;
           align-items: center;
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: rgba(var(--ink-rgb), 0.03);
+          border: 1px solid rgba(var(--ink-rgb), 0.08);
           border-radius: 999px;
           padding: 4px 14px;
           font-size: 11px;
@@ -177,17 +174,17 @@ export default function Experience() {
         .exp-tag {
           font-family: var(--mono, monospace);
           font-size: 12px;
-          color: var(--accent2, #3b82f6);
-          background: rgba(59, 130, 246, 0.1);
-          border: 1px solid rgba(59, 130, 246, 0.2);
+          color: var(--accent);
+          background: rgba(var(--accent-rgb), 0.1);
+          border: 1px solid rgba(var(--accent-rgb), 0.25);
           padding: 6px 14px;
           border-radius: 999px;
           transition: all 0.2s ease;
         }
 
         .exp-tag:hover {
-          background: rgba(59, 130, 246, 0.15);
-          border-color: rgba(59, 130, 246, 0.4);
+          background: rgba(var(--accent-rgb), 0.18);
+          border-color: rgba(var(--accent-rgb), 0.45);
         }
 
         /* --- RESPONSIVE --- */
@@ -216,8 +213,17 @@ export default function Experience() {
 }
 
 function ExpItem({ exp }) {
+  const theme = useTheme()
   return (
-    <motion.div variants={itemVariants} className="exp-item">
+    <motion.div variants={itemVariants}>
+    <SpotlightCard
+      className="exp-item"
+      theme={theme === 'dark' ? 'dark' : 'light'}
+      spotlightColor={theme === 'dark' ? '#c9a96e' : '#a07a38'}
+      intensity={theme === 'dark' ? 0.18 : 0.12}
+      spotlightSize={340}
+      style={{ '--spotlight-card-surface': 'var(--surface)' }}
+    >
       {/* Kolom Kiri: Waktu & Durasi */}
       <div className="exp-meta">
         <p className="exp-period">{exp.period}</p>
@@ -244,6 +250,7 @@ function ExpItem({ exp }) {
           ))}
         </div>
       </div>
+    </SpotlightCard>
     </motion.div>
   )
 }
