@@ -17,7 +17,7 @@ const projects = [
     ],
     type: 'AI & Geospatial Platform',
     year: '2026',
-    status: 'Live',
+    status: 'Completed',
     color: '#ef4444', // Crimson/Alert Red
     accent: 'rgba(239, 68, 68, 0.12)',
     mockupLines: [
@@ -36,11 +36,11 @@ const projects = [
       { x: 16, y: 160, w: '53px', h: '18px', bg: '#ef4444', radius: '4px' }, // Tombol Simulasi
       // Panel Skor Metrik (Kanan)
       { x: '78%', y: 48, w: '65px', h: '110px', bg: '#111827cc', radius: '6px' },
-      { x: '82%', y: 58, w: '45px', h: '35px', bg: '#rgba(255,255,255,0.03)', radius: '4px' }, // Mini Chart Placeholder
+      { x: '82%', y: 58, w: '45px', h: '35px', bg: 'rgba(255,255,255,0.03)', radius: '4px' }, // Mini Chart Placeholder
     ],
     links: {
-      live: 'https://simdampak-403394555424.asia-southeast1.run.app/', // Ganti atau sesuaikan jika URL Cloud Run berbeda
-      github: 'https://github.com/tehtongtjie/simdampak/tree/main', // Ganti dengan URL GitHub yang sesuai
+      live: null,
+      github: 'https://github.com/tehtongtjie/simdampak/tree/main',
     },
   },
   {
@@ -73,7 +73,7 @@ const projects = [
       { x: '68%', y: 184, w: '28%', h: '56px', bg: '#1e293b', radius: '10px' },
     ],
     links: {
-      live: 'https://sederhanai-403394555424.asia-southeast1.run.app/',
+      live: null,
       github: null,
     },
   },
@@ -102,7 +102,7 @@ const projects = [
       { x: '41%', y: 170, w: '40%', h: '6px', bg: '#7C3AED88', radius: '4px' }, // Highlight line (Violet)
       { x: '41%', y: 182, w: '30%', h: '6px', bg: '#ffffff15', radius: '4px' },
     ],
-    links: { live: 'https://aetherpass-403394555424.asia-southeast1.run.app', github: 'https://github.com/tehtongtjie/AetherPass' },
+    links: { live: null, github: 'https://github.com/tehtongtjie/AetherPass' },
   },
   {
     id: 4,
